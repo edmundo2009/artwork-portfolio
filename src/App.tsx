@@ -4,7 +4,6 @@ import { mockArtworks, getUniqueYears } from './data/artworks';
 import { useArtworks } from './hooks/useArtworks';
 import { useKeyboardNavigation } from './hooks/useKeyboardNavigation';
 import ArtworkDisplay from './components/ArtworkDisplay';
-// import HeroSection from './components/HeroSection';
 import NavigationArrows from './components/NavigationArrows';
 import FloatingMenu from './components/FloatingMenu';
 

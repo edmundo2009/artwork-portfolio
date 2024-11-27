@@ -1,7 +1,7 @@
 // components/ArtworkDisplay.tsx
 import React, { useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
-import { Artwork, ArtworkDisplayType } from '../types/artwork';
+import { Artwork, ArtworkDisplayType } from '@/types/artwork';
 
 interface ArtworkDisplayProps {
   artwork: Artwork;
@@ -64,10 +64,44 @@ const ArtworkDisplay: React.FC<ArtworkDisplayProps> = ({ artwork }) => {
         alt={artwork.title}
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-8">
-        <div className="text-white max-w-xl text-center">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="p-8 bg-black bg-opacity-50 rounded-lg">
+          <div className="text-white max-w-xl">
+            <h2 className="text-3xl font-bold mb-4">{artwork.title} ({artwork.year})</h2>
+            <Markdown className="prose prose-invert">{markdownContent}</Markdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderFullScreenWithWhiteText = () => (
+    <div className="w-full h-full relative">
+      <img
+        src={artwork.imageUrl}
+        alt={artwork.title}
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 flex items-center justify-center text-white">
+        <div className="max-w-xl text-center">
           <h2 className="text-3xl font-bold mb-4">{artwork.title} ({artwork.year})</h2>
-          <Markdown className="prose prose-invert">{markdownContent}</Markdown>
+          <Markdown className="prose text-white">{markdownContent}</Markdown>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderFullScreenWithBlackText = () => (
+    <div className="w-full h-full relative">
+      <img
+        src={artwork.imageUrl}
+        alt={artwork.title}
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 flex items-center justify-center text-black">
+        <div className="max-w-xl text-center">
+          <h2 className="text-3xl font-bold mb-4">{artwork.title} ({artwork.year})</h2>
+          <Markdown className="prose text-black">{markdownContent}</Markdown>
         </div>
       </div>
     </div>
@@ -80,6 +114,10 @@ const ArtworkDisplay: React.FC<ArtworkDisplayProps> = ({ artwork }) => {
       return renderSplitScreenTextLeft();
     case ArtworkDisplayType.FullScreenWithOverlay:
       return renderFullScreenWithOverlay();
+    case ArtworkDisplayType.FullScreenWithWhiteText:
+      return renderFullScreenWithWhiteText();
+    case ArtworkDisplayType.FullScreenWithBlackText:
+      return renderFullScreenWithBlackText();
     default:
       return renderFullScreen();
   }

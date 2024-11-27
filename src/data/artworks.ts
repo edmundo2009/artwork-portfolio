@@ -33,16 +33,16 @@ export const mockArtworks: Artwork[] = [
     year: 2022,
     imageUrl: '/artwork/2022/2022-2.png',
     title: 'Artwork 4',
-    type: ArtworkDisplayType.FullScreen,
-    // descriptionPath: '/descriptions/4.md'
+    type: 4,
+    descriptionPath: '/descriptions/4.md'
   },
   {
     id: '5',
     year: 2022,
     imageUrl: '/artwork/2022/2022-3.jpg',
     title: 'Artwork EEE',
-    type: ArtworkDisplayType.FullScreen,
-    // descriptionPath: '/descriptions/4.md'
+    type: 5,
+    descriptionPath: '/descriptions/4.md'
   },
   {
     id: '4',

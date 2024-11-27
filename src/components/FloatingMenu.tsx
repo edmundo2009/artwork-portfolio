@@ -1,11 +1,11 @@
-// components/FloatingMenu.tsx
 import React, { useState, useRef, useEffect } from 'react';
-import { Bars3Icon } from '@heroicons/react/24/solid';
+// import { Button } from 'lucide-react';
 import { FloatingMenuProps } from '../types/artwork';
 
 export const FloatingMenu: React.FC<FloatingMenuProps> = ({ years, selectedYear, onYearSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const timeoutRef = useRef<number | null>(null);
 
   const handleMouseEnter = () => {
@@ -50,22 +50,38 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({ years, selectedYear,
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="text-white hover:text-gray-300 transition-colors p-2 rounded-full bg-black bg-opacity-50 cursor-pointer">
-        <Bars3Icon className="w-6 h-6" />
-      </div>
+      <button
+        ref={buttonRef}
+        className="flex items-center gap-2 px-3 py-2 
+                   bg-gray-800 text-white 
+                   rounded-lg shadow-md 
+                   hover:bg-gray-700 
+                   transition-colors duration-200 
+                   focus:outline-none focus:ring-2 focus:ring-gray-600"
+      >
+        {/* <Works /> */}
+        Works
+      </button>
+
       {isOpen && (
         <div
-          className="absolute top-full right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden 
-                      animate-fade-in-down"
+          style={{ width: buttonRef.current ? buttonRef.current.offsetWidth : 'auto' }}
+          className="absolute top-full right-0 mt-2 
+                     bg-gray-800 text-white 
+                     rounded-lg shadow-lg 
+                     overflow-hidden 
+                     border border-gray-700 
+                     animate-fade-in-down"
         >
           {years.map((year) => (
             <button
               key={year}
               onClick={(e) => handleYearClick(e, year)}
-              className={`block w-full text-left px-4 py-2 text-sm transition-colors duration-200 
-                ${selectedYear === year
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-700 hover:bg-gray-50'
+              className={`block w-full text-left px-3 py-2 text-sm 
+                          transition-colors duration-200 
+                          ${selectedYear === year
+                  ? 'bg-gray-700'
+                  : 'hover:bg-gray-700'
                 }`}
             >
               {year}

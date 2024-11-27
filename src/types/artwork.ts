@@ -1,11 +1,12 @@
 // types/artwork.ts
-import { ReactNode } from 'react';
 
 // Artwork display types
 export enum ArtworkDisplayType {
   FullScreen = 1,
   SplitScreenTextLeft = 2,
-  FullScreenWithOverlay = 3
+  FullScreenWithOverlay = 3,
+  FullScreenWithWhiteText = 4,
+  FullScreenWithBlackText = 5,
 }
 
 export interface Artwork {
