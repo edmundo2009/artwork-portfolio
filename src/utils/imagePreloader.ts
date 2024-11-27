@@ -1,9 +1,28 @@
-export const preloadImage = (src: string): Promise<void> => {
+// export const preloadImage = (src: string): Promise<void> => {
+//   return new Promise((resolve, reject) => {
+//     const img = new Image();
+//     img.onload = () => resolve();
+//     img.onerror = reject;
+//     img.src = src;
+//   });
+// };
+
+// utils/imagePreloader.ts
+
+export const preloadImage = (imageUrl?: string): Promise<void> => {
   return new Promise((resolve, reject) => {
+    if (!imageUrl) {
+      resolve();
+      return;
+    }
+
     const img = new Image();
     img.onload = () => resolve();
     img.onerror = reject;
-    img.src = src;
+    img.src = imageUrl;
   });
 };
 
+export const preloadImages = async (imageUrls: string[]): Promise<void> => {
+  await Promise.all(imageUrls.map(preloadImage));
+};

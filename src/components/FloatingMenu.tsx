@@ -6,7 +6,7 @@ import { FloatingMenuProps } from '../types/artwork';
 export const FloatingMenu: React.FC<FloatingMenuProps> = ({ years, selectedYear, onYearSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   const handleMouseEnter = () => {
     // Clear any existing timeout

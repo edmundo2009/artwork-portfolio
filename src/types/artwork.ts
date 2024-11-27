@@ -1,8 +1,20 @@
+// types/artwork.ts
+import { ReactNode } from 'react';
+
+// Artwork display types
+export enum ArtworkDisplayType {
+  FullScreen = 1,
+  SplitScreenTextLeft = 2,
+  FullScreenWithOverlay = 3
+}
+
 export interface Artwork {
   id: string;
   year: number;
   imageUrl: string;
   title: string;
+  type: ArtworkDisplayType;
+  descriptionPath?: string; // Path to markdown description
 }
 
 export interface ArtworkState {
