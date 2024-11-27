@@ -1,4 +1,4 @@
-// data/artworks.ts
+// data/artwork-description.ts
 import { Artwork, ArtworkDisplayType } from '../types/artwork';
 
 export const mockArtworks: Artwork[] = [
@@ -7,17 +7,20 @@ export const mockArtworks: Artwork[] = [
     year: 2023,
     imageUrl: '/artwork/2023/2023-1.jpg',
     title: 'Artwork 1',
-    type: 1,
-    // type: ArtworkDisplayType.FullScreen,
-    descriptionPath: '/descriptions/1.md'
+    type: 3, //ArtworkDisplayType.FullScreenWithOverlay,
+    descriptionPath: '/descriptions/3.md',
+    style: {
+      textPlacement: 'top-left',
+      textColor: '', // leave empty for white, use green-500 for specific color shades
+      bgOpacity: 0.1, 
+    },
   },
   {
     id: '2',
     year: 2023,
     imageUrl: '/artwork/2023/2023-2.jpg',
     title: 'Artwork 2',
-    type: 2,
-    // type: ArtworkDisplayType.SplitScreenTextLeft,
+    type: 2, // type: ArtworkDisplayType.SplitScreenTextLeft,
     descriptionPath: '/descriptions/2.md'
   },
   {
@@ -25,27 +28,37 @@ export const mockArtworks: Artwork[] = [
     year: 2022,
     imageUrl: '/artwork/2022/2022-1.png',
     title: 'Artwork 3',
-    type: ArtworkDisplayType.FullScreenWithOverlay,
-    descriptionPath: '/descriptions/3.md'
+    type: 1, // type: ArtworkDisplayType.FullScreen,
+    // no descriptionPath since no description displayed
+    style: {
+      textPlacement: 'bottom-right',
+      textColor: 'black',
+      bgOpacity: 0.2,
+    },
   },
   {
     id: '4',
     year: 2022,
     imageUrl: '/artwork/2022/2022-2.png',
     title: 'Artwork 4',
-    type: 4,
-    descriptionPath: '/descriptions/4.md'
+    type: 3, //ArtworkDisplayType.FullScreenWithRawText
+    descriptionPath: '/descriptions/4.md',
+    style: {
+      textPlacement: 'top-right',
+      textColor: '',
+      bgOpacity: 0,
+    },
   },
   {
     id: '5',
     year: 2022,
     imageUrl: '/artwork/2022/2022-3.jpg',
     title: 'Artwork EEE',
-    type: 5,
+    type: 3,
     descriptionPath: '/descriptions/4.md'
   },
   {
-    id: '4',
+    id: '6',
     year: 2021,
     imageUrl: '/artwork/2021//2021-1.png',
     title: 'Artwork AAA',

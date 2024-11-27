@@ -1,6 +1,6 @@
 // App.tsx
 import React, { useState } from 'react';
-import { mockArtworks, getUniqueYears } from './data/artworks';
+import { mockArtworks, getUniqueYears } from './data/artwork-description';
 import { useArtworks } from './hooks/useArtworks';
 import { useKeyboardNavigation } from './hooks/useKeyboardNavigation';
 import ArtworkDisplay from './components/ArtworkDisplay';

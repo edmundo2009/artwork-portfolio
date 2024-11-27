@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-// import { Button } from 'lucide-react';
 import { FloatingMenuProps } from '../types/artwork';
 
 export const FloatingMenu: React.FC<FloatingMenuProps> = ({ years, selectedYear, onYearSelect }) => {

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Artwork } from '@/types/artwork';
 import { preloadImage } from '@/utils/imagePreloader';
-import { mockArtworks } from '@/data/artworks';
+import { mockArtworks } from '@/data/artwork-description';
 
 export const useArtworks = (selectedYear: number | null) => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);

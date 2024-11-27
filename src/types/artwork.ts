@@ -5,8 +5,8 @@ export enum ArtworkDisplayType {
   FullScreen = 1,
   SplitScreenTextLeft = 2,
   FullScreenWithOverlay = 3,
-  FullScreenWithWhiteText = 4,
-  FullScreenWithBlackText = 5,
+  // FullScreenWithRawText = 4,
+  // FullScreenWithBlackText = 5,
 }
 
 export interface Artwork {
@@ -16,6 +16,14 @@ export interface Artwork {
   title: string;
   type: ArtworkDisplayType;
   descriptionPath?: string; // Path to markdown description
+  style?: ArtworkStyle;
+}
+
+export interface ArtworkStyle {
+  textPlacement?: 'top-left' | 'top-center' | 'top-right' | 'center' | 'bottom-left' | 'bottom-center' | 'bottom-right';
+  textColor?: string;
+  bgOpacity?: number;
+  // Add other style properties as needed
 }
 
 export interface ArtworkState {
