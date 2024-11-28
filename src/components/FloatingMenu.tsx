@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FloatingMenuProps } from '../types/artwork';
+import { FloatingMenuProps } from '@/types/artwork';
 
 export const FloatingMenu: React.FC<FloatingMenuProps> = ({ years, selectedYear, onYearSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,8 +58,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({ years, selectedYear,
                    transition-colors duration-200 
                    focus:outline-none focus:ring-2 focus:ring-gray-600"
       >
-        {/* <Works /> */}
-        Works
+        Complete Works
       </button>
 
       {isOpen && (

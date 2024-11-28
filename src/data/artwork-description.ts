@@ -20,14 +20,14 @@ export const mockArtworks: Artwork[] = [
     id: '1',
     year: 2023,
     imageUrl: '/artwork/2023/2023-1.jpg',
-    title: 'Artwork 1',
-    type: ArtworkDisplayType.FullScreenWithOverlay,
-    descriptionPath: '/descriptions/3.md',
-    // optional for everything from here onwards, if not provided defaults to components/ArtworkDisplay.tsx
+    title: 'Artwork TITLE 1',
+    type: 2, //1: FullScreen, 2: SplitScreenTextLeft, 3: FullScreenWithOverlay
+    descriptionPath: '/descriptions/3.md', // only required for 2: SplitScreenTextLeft, 3: FullScreenWithOverlay
+    // optional for everything from here onwards, if not provided defaults to @/components/ArtworkDisplay.tsx
     style: {
       textPlacement: 'top-left',
       textColor: 'green-500',
-      bgOpacity: .1,
+      bgOpacity: .5,
       typography: {
         title: {
           size: 'xl',
@@ -35,7 +35,7 @@ export const mockArtworks: Artwork[] = [
           marginBottom: 4
         },
         description: {
-          size: 'xs',
+          size: 'xl',
           weight: 'light',
           lineHeight: 'relaxed',
           marginBottom: 1
@@ -53,27 +53,6 @@ export const mockArtworks: Artwork[] = [
     },
   },
   
-  // {
-  //   id: '1',
-  //   year: 2023,
-  //   imageUrl: '/artwork/2023/2023-1.jpg',
-  //   title: 'Artwork 1',
-  //   type: ArtworkDisplayType.FullScreenWithOverlay,
-  //   descriptionPath: '/descriptions/3.md',
-  //   style: {
-  //     // Override just the text color while keeping other defaults
-  //     textColor: 'green-500',
-
-  //     // Optionally customize typography
-  //     typography: {
-  //       title: {
-  //         size: '4xl',
-  //         weight: 'semibold'
-  //       }
-  //     }
-  //   },
-  // },
-  
   {
     id: '2',
     year: 2023,
@@ -88,13 +67,36 @@ export const mockArtworks: Artwork[] = [
     imageUrl: '/artwork/2022/2022-1.png',
     title: 'Artwork 3',
     type: 1, // type: ArtworkDisplayType.FullScreen,
-    // no descriptionPath since no description displayed
+    // no descriptionPath since 1: FullScreen doesn't require a description
     style: {
-      textPlacement: 'bottom-right',
-      textColor: 'black',
+      textPlacement: 'center',
+      textColor: '',
       bgOpacity: 0.2,
+      typography: {
+        title: {
+          size: '4xl',
+          weight: 'bold',
+          marginBottom: 6
+        },
+        description: {
+          size: 'xl',
+          weight: 'light',
+          lineHeight: 'relaxed',
+          marginBottom: 1
+        }
+      },
+      spacing: {
+        padding: {
+          x: 2,
+          y: 2
+        },
+        margin: {
+          x: 2
+        }
+      }
     },
   },
+
   {
     id: '4',
     year: 2022,
