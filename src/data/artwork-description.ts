@@ -26,28 +26,28 @@ export const mockArtworks: Artwork[] = [
     // optional for everything from here onwards, if not provided defaults to @/components/ArtworkDisplay.tsx
     style: {
       textPlacement: 'top-left',
-      textColor: 'green-500',
-      bgOpacity: .5,
+      textColor: 'black', //'green-500',
+      bgOpacity: .1,
       typography: {
         title: {
-          size: 'xl',
+          size: '4xl',
           weight: 'bold',
-          marginBottom: 4
+          marginBottom: 6
         },
         description: {
-          size: 'xl',
-          weight: 'light',
+          size: 'base',
+          weight: 'bold',
           lineHeight: 'relaxed',
-          marginBottom: 1
+          marginBottom: 2
         }
       },
       spacing: {
         padding: {
-          x: 6,
-          y: 6
+          x: 4,
+          y: 4
         },
         margin: {
-          x: 2
+          x: 4
         }
       }
     },

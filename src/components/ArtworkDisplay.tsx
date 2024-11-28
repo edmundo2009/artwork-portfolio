@@ -50,7 +50,7 @@ const ArtworkDisplay: React.FC<ArtworkDisplayProps> = ({ artwork }) => {
       bgOpacity: 0,
       typography: {
         title: {
-          size: '2xl',
+          size: '4xl',
           weight: 'bold',
           marginBottom: 4
         }
@@ -128,16 +128,22 @@ const ArtworkDisplay: React.FC<ArtworkDisplayProps> = ({ artwork }) => {
 
   const renderSplitScreenTextLeft = () => (
     <div className="flex w-full h-full">
-      <div className="w-1/2 bg-gray-100 p-8 overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-4">{artwork.title}</h2>
-        {/* <h2 className="text-2xl font-bold mb-4">{artwork.title} ({artwork.year})</h2> */}
-        <ReactMarkdown
-          components={MarkdownComponents}
-          remarkPlugins={[remarkGfm]}
-          className="prose max-w-none"
-        >
-          {markdownContent}
-        </ReactMarkdown>
+      <div className="w-1/2 relative bg-gray-100 overflow-y-auto">
+        <TextOverlay style={style}>
+          <div>
+            <h2>{artwork.title}</h2>
+            {/* <h2>{artwork.title} ({artwork.year})</h2> */}
+            {markdownContent && (
+              <ReactMarkdown
+                components={MarkdownComponents}
+                remarkPlugins={[remarkGfm]}
+                className="prose max-w-none"
+              >
+                {markdownContent}
+              </ReactMarkdown>
+            )}
+          </div>
+        </TextOverlay>
       </div>
       <div className="w-1/2">
         <img
@@ -160,17 +166,15 @@ const ArtworkDisplay: React.FC<ArtworkDisplayProps> = ({ artwork }) => {
       <TextOverlay style={style}>
         <div>
           <h2>{artwork.title}</h2>
-          {/* <h2>{artwork.title} ({artwork.year})</h2> */}
-          {/* <h2 className="text-3xl font-bold mb-4">{artwork.title} ({artwork.year})</h2> */}
           {markdownContent && (
             <div>
-            <ReactMarkdown
-              components={MarkdownComponents}
-              remarkPlugins={[remarkGfm]}
-              className="prose max-w-none"
-            >
-              {markdownContent}
-            </ReactMarkdown>
+              <ReactMarkdown
+                components={MarkdownComponents}
+                remarkPlugins={[remarkGfm]}
+                className="prose max-w-none"
+              >
+                {markdownContent}
+              </ReactMarkdown>
             </div>
           )}
         </div>
