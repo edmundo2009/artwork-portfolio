@@ -2,19 +2,78 @@
 import { Artwork, ArtworkDisplayType } from '../types/artwork';
 
 export const mockArtworks: Artwork[] = [
+  // {
+  //   id: '1',
+  //   year: 2023,
+  //   imageUrl: '/artwork/2023/2023-1.jpg',
+  //   title: 'Artwork 1',
+  //   type: 3, //ArtworkDisplayType.FullScreenWithOverlay,
+  //   descriptionPath: '/descriptions/3.md',
+  //   style: {
+  //     textPlacement: 'top-left',
+  //     textColor: '', 
+  //     bgOpacity: 0.1, 
+  //   },
+  // },
+
   {
     id: '1',
     year: 2023,
     imageUrl: '/artwork/2023/2023-1.jpg',
     title: 'Artwork 1',
-    type: 3, //ArtworkDisplayType.FullScreenWithOverlay,
+    type: ArtworkDisplayType.FullScreenWithOverlay,
     descriptionPath: '/descriptions/3.md',
+    // optional for everything from here onwards, if not provided defaults to components/ArtworkDisplay.tsx
     style: {
       textPlacement: 'top-left',
-      textColor: '', // leave empty for white, use green-500 for specific color shades
-      bgOpacity: 0.1, 
+      textColor: 'green-500',
+      bgOpacity: .1,
+      typography: {
+        title: {
+          size: 'xl',
+          weight: 'bold',
+          marginBottom: 4
+        },
+        description: {
+          size: 'xs',
+          weight: 'light',
+          lineHeight: 'relaxed',
+          marginBottom: 1
+        }
+      },
+      spacing: {
+        padding: {
+          x: 6,
+          y: 6
+        },
+        margin: {
+          x: 2
+        }
+      }
     },
   },
+  
+  // {
+  //   id: '1',
+  //   year: 2023,
+  //   imageUrl: '/artwork/2023/2023-1.jpg',
+  //   title: 'Artwork 1',
+  //   type: ArtworkDisplayType.FullScreenWithOverlay,
+  //   descriptionPath: '/descriptions/3.md',
+  //   style: {
+  //     // Override just the text color while keeping other defaults
+  //     textColor: 'green-500',
+
+  //     // Optionally customize typography
+  //     typography: {
+  //       title: {
+  //         size: '4xl',
+  //         weight: 'semibold'
+  //       }
+  //     }
+  //   },
+  // },
+  
   {
     id: '2',
     year: 2023,

@@ -1,10 +1,10 @@
 // components/TextOverlay.tsx
 import { ArtworkStyle } from '@/types/artwork';
-import React from 'react';
+import React, { ReactNode, ReactElement, isValidElement, Children } from 'react';
 
 interface TextOverlayProps {
   style?: ArtworkStyle;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const TextOverlay: React.FC<TextOverlayProps> = ({ style, children }) => {
@@ -38,7 +38,6 @@ const TextOverlay: React.FC<TextOverlayProps> = ({ style, children }) => {
 
   const getBackgroundClasses = (bgOpacity?: number) => {
     if (bgOpacity !== undefined && bgOpacity >= 0 && bgOpacity <= 1) {
-      // Map continuous opacity values to predefined Tailwind classes
       const opacityMap: { [key: number]: string } = {
         0: 'bg-opacity-0',
         0.1: 'bg-opacity-10',
@@ -53,7 +52,6 @@ const TextOverlay: React.FC<TextOverlayProps> = ({ style, children }) => {
         1: 'bg-opacity-100'
       };
 
-      // Find the closest predefined opacity class
       const closestOpacity = Object.keys(opacityMap)
         .map(Number)
         .reduce((prev, curr) =>
@@ -65,16 +63,116 @@ const TextOverlay: React.FC<TextOverlayProps> = ({ style, children }) => {
     return '';
   };
 
+  const getTitleClasses = (typography?: ArtworkStyle['typography']) => {
+    const titleSize = typography?.title?.size ? `text-${typography.title.size}` : 'text-2xl';
+    const titleWeight = typography?.title?.weight ? `font-${typography.title.weight}` : 'font-bold';
+    const titleMargin = typography?.title?.marginBottom !== undefined
+      ? `mb-${typography.title.marginBottom}`
+      : 'mb-4';
+
+    return `${titleSize} ${titleWeight} ${titleMargin}`;
+  };
+
+  const getDescriptionClasses = (typography?: ArtworkStyle['typography']) => {
+    const descSize = typography?.description?.size ? `text-${typography.description.size}` : 'text-base';
+    const descWeight = typography?.description?.weight ? `font-${typography.description.weight}` : 'font-normal';
+    const descLineHeight = typography?.description?.lineHeight
+      ? `leading-${typography.description.lineHeight}`
+      : 'leading-relaxed';
+    const descMargin = typography?.description?.marginBottom !== undefined
+      ? `mb-${typography.description.marginBottom}`
+      : 'mb-4';
+
+    return `${descSize} ${descWeight} ${descLineHeight} ${descMargin}`;
+  };
+
+  const getSpacingClasses = (spacing?: ArtworkStyle['spacing']) => {
+    const paddingX = spacing?.padding?.x !== undefined ? `px-${spacing.padding.x}` : 'px-4';
+    const paddingY = spacing?.padding?.y !== undefined ? `py-${spacing.padding.y}` : 'py-4';
+    const marginX = spacing?.margin?.x !== undefined ? `mx-${spacing.margin.x}` : '';
+    const marginY = spacing?.margin?.y !== undefined ? `my-${spacing.margin.y}` : '';
+
+    return `${paddingX} ${paddingY} ${marginX} ${marginY}`;
+  };
+
+  const positionClasses = getPositionClasses(style?.textPlacement);
+  const textColorClass = getTextColorClass(style?.textColor);
+  const backgroundClasses = getBackgroundClasses(style?.bgOpacity);
+  const spacingClasses = getSpacingClasses(style?.spacing);
+
   const classes = [
-    getPositionClasses(style?.textPlacement),
-    getTextColorClass(style?.textColor),
-    getBackgroundClasses(style?.bgOpacity),
-    'absolute p-4' // Ensure consistent positioning
+    positionClasses,
+    textColorClass,
+    backgroundClasses,
+    spacingClasses,
+    'absolute'
   ].join(' ');
+
+  const enhanceClassName = (
+    element: ReactElement,
+    defaultClasses: string
+  ): ReactElement => {
+    // Type assertion to allow adding className
+    const elementWithProps = element as ReactElement & {
+      props: {
+        className?: string,
+        children?: ReactNode
+      }
+    };
+
+    // Merge existing className with default classes
+    const mergedClassName = [
+      elementWithProps.props.className || '',
+      defaultClasses
+    ].filter(Boolean).join(' ');
+
+    // Create a new element with merged className and preserve children
+    return React.cloneElement(
+      elementWithProps,
+      { className: mergedClassName },
+      elementWithProps.props.children
+    );
+  };
+
+  const processChildren = (childrenToProcess: ReactNode): ReactNode => {
+    return Children.map(childrenToProcess, (child) => {
+      if (!isValidElement(child)) return child;
+
+      // Handle the first level of children
+      switch (child.type) {
+        case 'h2':
+          return enhanceClassName(child, getTitleClasses(style?.typography));
+
+        case 'div':
+          return React.cloneElement(child, {},
+            // Process grandchildren
+            Children.map(child.props.children, (grandChild) => {
+              if (!isValidElement(grandChild)) return grandChild;
+
+              switch (grandChild.type) {
+                case 'h2':
+                  return enhanceClassName(grandChild, getTitleClasses(style?.typography));
+
+                case 'p':
+                case 'span':
+                case 'div':
+                  return enhanceClassName(grandChild, getDescriptionClasses(style?.typography));
+
+                default:
+                  return grandChild;
+              }
+            })
+          );
+
+        default:
+          return child;
+      }
+    });
+  };
 
   return (
     <div className={classes}>
-      {children}
+      {processChildren(children)}
     </div>
   );
 };
